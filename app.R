@@ -10,11 +10,11 @@ library(ggplot2)
 library(ggpubr)
 library(ggsignif)
 library(DESeq2)
-plotting.dds <- readRDS(gzcon(url("https://github.com/UMichNMR-Metabolomics/OVPRKidneyTranscriptomics/raw/refs/heads/main/plotting_dds.RDS")))
-plottingnames <- readRDS(gzcon(url("https://github.com/UMichNMR-Metabolomics/OVPRKidneyTranscriptomics/raw/refs/heads/main/plottingnames.RDS")))
-detectedgenes <- readRDS(gzcon(url("https://github.com/UMichNMR-Metabolomics/OVPRKidneyTranscriptomics/raw/refs/heads/main/detectedgenes.RDS")))
+#plotting.dds <- readRDS(gzcon(url("https://github.com/UMichNMR-Metabolomics/OVPRKidneyTranscriptomics/raw/refs/heads/main/plotting_dds.RDS")))
+#lottingnames <- readRDS(gzcon(url("https://github.com/UMichNMR-Metabolomics/OVPRKidneyTranscriptomics/raw/refs/heads/main/plottingnames.RDS")))
+#detectedgenes <- readRDS(gzcon(url("https://github.com/UMichNMR-Metabolomics/OVPRKidneyTranscriptomics/raw/refs/heads/main/detectedgenes.RDS")))
 source("https://github.com/UMichNMR-Metabolomics/OVPRKidneyTranscriptomics/raw/refs/heads/main/plottingfunction.R")
-
+load(gzcon(url("https://github.com/UMichNMR-Metabolomics/OVPRKidneyTranscriptomics/raw/refs/heads/main/plottingdata.RData")), envir = .GlobalEnv)
 
 # Define UI ----
 ui <- page_fluid(
@@ -39,13 +39,13 @@ ui <- page_fluid(
 
 # Define server logic ----
 server <- function(input, output) {
-  output$table <- renderDataTable({datatable(detectedgenes)})
+  output$table <- renderDataTable({datatable(rawsequencingreport)})
   output$plot <- renderPlot({
     gene <- input$gene
     transcript_plot(gene)
   })
   output$missing <- renderText({
-    ifelse(any(detectedgenes == input$gene) == TRUE, 
+    ifelse(any(rawsequencingreport == input$gene) == TRUE, 
            ifelse(any(plottingnames == input$gene) == TRUE, "", "The gene you have selected was reported in the sequencing results from the Advanced Genomics Core but was excluded from statistical analysis due to insufficient data and cannot be plotted."), 
            "The gene you have selected was not reported in the sequencing results from the Advanced Genomics Core")
   })
