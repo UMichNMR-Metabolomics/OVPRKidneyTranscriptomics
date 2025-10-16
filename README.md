@@ -33,3 +33,12 @@ install.packages("ggsignif")
 ----------------------------------------------------------------------------------------
 
 Once RStudio and all packages have been installed, open the app.R script and launch the app by pressing the "Run App" button in RStudio.
+
+----------------------------------------------------------------------------------------
+
+APP WALKTHROUGH:
+The panel on the left contains a table of ALL genes present in the sequencing report delivered by the Advanced Genomics Core. It cross references Ensembl IDs with gene names and descriptions, and is searchable.
+
+The panel on the right contains an text box to enter the Ensembl ID of the gene you want to produce a plot for, and the plot itself. When the app first opens, there will be an error message instead of a plot, this is expected behavior.
+
+To generate a plot, use the table to look up the Ensembl ID of the gene you want to plot, and then either type or copy and paste the Ensembl ID into the text box above the plot.
